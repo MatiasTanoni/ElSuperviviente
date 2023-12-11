@@ -32,8 +32,8 @@ class FormMenuPlay(Form):
                           w= 230,
                           h= 50,
                           color_background = BLANCO,
-                          color_background_seleccionado= AMARILLO,
-                          color_border= AMARILLO,
+                          color_background_seleccionado= VERDE,
+                          color_border= VERDE,
                           color_border_seleccionado= BLANCO,
                           border_size= 4, 
                           font= "Arial Black",
@@ -114,14 +114,8 @@ class FormMenuPlay(Form):
     def sanitize_name(self):
         """
         Brief: Sanitiza un nombre ingresado en un contexto de interfaz gráfica.
-
-        Descripción:
             Este método toma el texto ingresado en un cuadro de entrada de la GUI, elimina dígitos numéricos,
             convierte el texto a formato de título y elimina espacios en blanco al principio y al final.
-
-        Parámetros:
-            Ninguno
-
         Retorno:
             str: El nombre sanitizado si no está vacío, de lo contrario, devuelve "N/A".
         """
@@ -135,13 +129,13 @@ class FormMenuPlay(Form):
         else:
             return "Incognito"
  
-    def update(self, events):
+    def actualizar(self, events):
         if self.verificar_dialog_result():
             for widget in self.lista_widgets:
-                widget.update(events)
+                widget.actualizar(events)
             self.draw()  
         else:
-            self.hijo.update(events)
+            self.hijo.actualizar(events)
 
     def create_level(self, level_name):
         pygame.mixer.music.pause()

@@ -53,7 +53,7 @@ class FormMenuOptions(Form):
                                             15, 
                                             self.volumen, 
                                             BLANCO, 
-                                            AMARILLO)
+                                            VERDE)
         
         porcentaje_volumen = f"{self.volumen * 100}%"
         self.label_volumen = Label(self._slave, 
@@ -90,7 +90,7 @@ class FormMenuOptions(Form):
 
     def update_volumen(self, lista_eventos):
         self.volumen = self.slider_volumen.value
-        self.label_volumen.update(lista_eventos)
+        self.label_volumen.actualizar(lista_eventos)
         self.label_volumen.set_text(f"{round(self.volumen * 100)}%")
         py.mixer.music.set_volume(self.volumen)
 
@@ -102,15 +102,15 @@ class FormMenuOptions(Form):
 
         self.flag_play = not self.flag_play
 
-    def update(self, events):
+    def actualizar(self, events):
         if self.verificar_dialog_result():
             for widget in self.lista_widgets:
-                widget.update(events)
+                widget.actualizar(events)
             self.update_volumen(events) 
             self.draw() 
             self.render()
         else:
-            self.hijo.update(events)
+            self.hijo.actualizar(events)
 
     def btn_home_click(self, param):
         self.end_dialog()

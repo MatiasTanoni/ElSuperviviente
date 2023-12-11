@@ -15,6 +15,14 @@ class Nivel:
         self.tiempo_inicial = py.time.get_ticks() + 300 * 1000
         self.tiempo_restante = self.tiempo_inicial
         self.completado = False
+        self.pausa = False
+
+
+    def reanudar_juego(self):
+        self.pausa = False
+
+    def pausar_juego(self):
+        self.pausa = True
 
     def establecer_titulo(self,titulo):
         """
@@ -107,6 +115,7 @@ class Nivel:
             if evento.type == py.KEYDOWN:
                 if evento.key == py.K_TAB:
                     self.cambiar_modo()
+            self.llenar_pantalla()
 
     def cambiar_modo(self):
         """

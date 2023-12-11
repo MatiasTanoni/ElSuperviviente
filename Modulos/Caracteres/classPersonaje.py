@@ -78,7 +78,6 @@ class Personaje(Object):
             x = self.rectangulo.left - 100 + margen
             
         if x is not None:
-            print(self.que_hace)
             self.lista_proyectiles.append(Disparo((20,20),(x,y),self.que_hace))
 
     def actualizar_proyectiles(self, pantalla):
@@ -191,7 +190,11 @@ class Personaje(Object):
         Parametros:pantalla: La superficie de la pantalla en la que se va a actualizar.
         """
         self.verificar_accion(pantalla,plataformas)
-        self.colisionar(enemigos,bombitas,objetos_que_caen,comidas,jefe)
+        self.colisionar_jefe(self.lista_proyectiles,jefe)
+        self.colisionar_bombitas(bombitas)
+        self.colisionar_enemigos(enemigos)
+        self.colisionar_obj(objetos_que_caen)
+        self.colisionar_items(comidas)
         self.mostrar_vida(pantalla)  
         self.actualizar_proyectiles(pantalla)
 
@@ -230,21 +233,23 @@ class Personaje(Object):
 
             super().mover_arriba()
 
-    def colisionar(self,enemigos,bombitas,objetos_que_caen,items,jefe):
-        """
-        Brief:Maneja las colisiones del personaje con diversos elementos del juego, actualizando vidas y puntajes.
-        Parametros: enemigos: Lista de enemigos en el juego.
-                bombitas: Lista de bombas en el juego.
-                objetos_que_caen: Lista de objetos que caen en el juego.
-                items: Lista de items en el juego.
-                jefe: Jefe en el juego.
-        """
+
+    def colisionar_enemigos(self,enemigos):
         for enemigo in enemigos:
             if self.rectangulo.colliderect(enemigo.rectangulo):
                 self.vidas -= 1
                 self.rectangulo.x = 900
                 self.rectangulo.y = 460
                 self.efectos_de_sonido(r"Modulos\Assets\Musica\Die-Sound-Effect.mp3",0.2)
+        for proyectil in self.lista_proyectiles:
+            for enemigo in enemigos:
+                if proyectil.rectangulo.colliderect(enemigo.rectangulo):
+                    self.efectos_de_sonido(r"Modulos\Assets\Musica\cuando_muere_un_enemigo.mp3",0.1)
+                    enemigos.remove(enemigo)
+                    self.puntos += 20
+                    self.lista_proyectiles.remove(proyectil)
+            
+    def colisionar_bombitas(self,bombitas):
         for bomba in bombitas:
             if self.rectangulo.colliderect(bomba.rectangulo):
                 bombitas.remove(bomba)
@@ -252,6 +257,8 @@ class Personaje(Object):
                 self.rectangulo.x = 900
                 self.rectangulo.y = 460
                 self.efectos_de_sonido(r"Modulos\Assets\Musica\Die-Sound-Effect.mp3",0.2)
+
+    def colisionar_obj(self,objetos_que_caen):
         for obj in objetos_que_caen:
             if self.rectangulo.colliderect(obj.rectangulo):
                 if obj.tipo == "fuego":
@@ -259,12 +266,14 @@ class Personaje(Object):
                     self.vidas -= 1
                     self.rectangulo.x = 900
                     self.rectangulo.y = 460
-                    self.efectos_de_sonido(r"Modulos\Assets\Musica\sonido de items.mp3",0.2)
+                    self.efectos_de_sonido(r"Modulos\Assets\Musica\Die-Sound-Effect.mp3",0.2)
                 else:
                     self.efectos_de_sonido(r"Modulos\Assets\Musica\sonido de items.mp3",0.2)
                     if self.vidas < 3:
                         self.vidas += 1  
                     objetos_que_caen.remove(obj) 
+    
+    def colisionar_items(self,items):
         for item in items:
             if self.rectangulo.colliderect(item.rectangulo):             
                 if item.tipo == "agua":
@@ -278,25 +287,30 @@ class Personaje(Object):
                 else:
                     self.nivel_completado = True
                     self.efectos_de_sonido(r"Modulos\Assets\Musica\WIN-sound-effect-no-copyright.mp3",0.2)
-        for proyectil in self.lista_proyectiles:
-            for enemigo in enemigos:
-                if proyectil.rectangulo.colliderect(enemigo.rectangulo):
-                    self.efectos_de_sonido(r"Modulos\Assets\Musica\cuando_muere_un_enemigo.mp3",0.1)
-                    enemigos.remove(enemigo)
-                    self.puntos += 20
+
+    def colisionar_jefe(self,proyectiles,jefe):
+        
+        """
+        Brief:Maneja las colisiones del personaje con diversos elementos del juego, actualizando vidas y puntajes.
+        Parametros: enemigos: Lista de enemigos en el juego.
+                bombitas: Lista de bombas en el juego.
+                objetos_que_caen: Lista de objetos que caen en el juego.
+                items: Lista de items en el juego.
+                jefe: Jefe en el juego.
+        """
+        try:
+            for proyectil in proyectiles:             
+                if proyectil.rectangulo.colliderect(jefe.rectangulo):
+                    jefe.vidas -= 1
                     self.lista_proyectiles.remove(proyectil)
-        try:                 
-            if proyectil.rectangulo.colliderect(jefe.rectangulo):
-                jefe.vidas -= 1
-                self.lista_proyectiles.remove(proyectil)
-                if jefe.vidas <= 0:
-                    self.efectos_de_sonido(r"Modulos\Assets\Musica\cuando_muere_un_enemigo.mp3",0.1)
-                    self.puntos += 50
-            if jefe.rectangulo.colliderect(self.rectangulo):
-                self.efectos_de_sonido(r"Modulos\Assets\Musica\Die-Sound-Effect.mp3",0.2)
-                self.vidas -= 1
-                self.rectangulo.x = 900
-                self.rectangulo.y = 460
+                    if jefe.vidas <= 0:
+                        self.efectos_de_sonido(r"Modulos\Assets\Musica\cuando_muere_un_enemigo.mp3",0.1)
+                        self.puntos += 50
+                if jefe.rectangulo.colliderect(self.rectangulo):
+                    self.efectos_de_sonido(r"Modulos\Assets\Musica\Die-Sound-Effect.mp3",0.2)
+                    self.vidas -= 1
+                    self.rectangulo.x = 900
+                    self.rectangulo.y = 460
         except AttributeError:
             pass
         except UnboundLocalError:

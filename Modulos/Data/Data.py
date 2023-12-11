@@ -5,17 +5,10 @@ import sqlite3
 def crear_tabla(db_path):
     """
     Brief: Crea la tabla 'Tabla' en la base de datos si no existe.
-
-    Descripción:
         Esta función se conecta a la base de datos especificada y crea la tabla 'Tabla' si aún no existe.
-        La tabla 'Match' tiene las columnas 'id_player' (clave primaria), 'name_player', 'score_player',
-        y 'level_type'.
-
+        La tabla 'Tabla' tiene las columnas 'id_jugador' (clave primaria), 'nombre_jugador' y 'puntos_jugador'.
     Parámetros:
         - db_path (str): Ruta al archivo de la base de datos.
-
-    Retorno:
-        Ninguno
     """
     with sqlite3.connect(db_path) as conexion:
         try:
@@ -36,18 +29,12 @@ def crear_tabla(db_path):
 def insertar_datos(db_path, nombre_jugador, puntos_jugador):
     """
     Brief: Inserta datos del jugador en la tabla 'Tabla' de la base de datos.
-
-    Descripción:
         Esta función se conecta a la base de datos especificada e inserta datos del jugador en la
-        tabla 'Match'. Los datos incluyen el nombre del jugador, la puntuación y el tipo de nivel.
-
+        tabla 'Match'. Los datos incluyen el nombre del jugador y la puntuación.
     Parámetros:
         - db_path (str): Ruta al archivo de la base de datos.
         - nombre_jugador (str): Nombre del jugador.
         - puntos_jugador (int): Puntuación del jugador.
-
-    Retorno:
-        Ninguno
     """
     with sqlite3.connect(db_path) as conexion:
         try:
@@ -61,14 +48,10 @@ def insertar_datos(db_path, nombre_jugador, puntos_jugador):
 def obtener_top_puntaje(db_path):
     """
     Brief: Obtiene los tres puntajes más altos con nombres de la tabla 'Tabla' en la base de datos.
-
-    Descripción:
         Esta función se conecta a la base de datos especificada y realiza una consulta para obtener
         los tres puntajes más altos con los nombres correspondientes desde la tabla 'Tabla'.
-
     Parámetros:
         - db_path (str): Ruta al archivo de la base de datos.
-
     Retorno:
         list: Lista de tuplas que contienen nombres de jugadores y sus puntajes, ordenados por puntaje descendente.
     """

@@ -51,5 +51,5 @@ class Label(Widget):
     def get_text(self):
         return self._text
     
-    def update(self, lista_eventos):
+    def actualizar(self, lista_eventos):
         self.draw()

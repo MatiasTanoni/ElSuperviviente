@@ -20,9 +20,9 @@ class FormMenuPause(Form):
         self.level = level
         
         self._label_pause = Label(screen=self._slave,
-                          x=100,
+                          x=75,
                           y=40,
-                          w= 200,
+                          w= 250,
                           h= 50,
                           text= "Menu de Pausa",   
                           font= "Arial Black",
@@ -51,18 +51,18 @@ class FormMenuPause(Form):
     def render(self):
         self._slave.fill(self._color_background)
 
-    def update(self, events):
-        if self.level.pause:
+    def actualizar(self, events):
+        if self.level.pausa:
             if self.verificar_dialog_result():
                 for widget in self.lista_widgets:
-                    widget.update(events)
+                    widget.actualizar(events)
                 self.draw() 
             else:
-                self.hijo.update(events)
+                self.hijo.actualizar(events)
             
     def btn_unpause_click(self, param):
-        self.level.resume_game()
-        self.level.play_music()
+        self.level.reanudar_juego()
+        self.level.reproducir_musica()
         self.end_dialog()
     
     def btn_home_click(self, param):

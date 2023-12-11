@@ -60,7 +60,7 @@ class CheckBox(Widget):
         self.slave_rect_collide.x += self._master_x
         self.slave_rect_collide.y += self._master_y
     
-    def update(self, lista_eventos):
+    def actualizar(self, lista_eventos):
         
         self.isclicked = False
         if self.contador_click > FPS/2:

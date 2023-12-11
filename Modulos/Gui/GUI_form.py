@@ -61,6 +61,6 @@ class Form(Widget):
  
     def render(self):
         pass
-    def update(self, lista_eventos):
+    def actualizar(self, lista_eventos):
         pass
     

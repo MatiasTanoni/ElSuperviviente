@@ -40,7 +40,7 @@ class Slider(Widget):
         super().draw()
         pygame.draw.circle(self._master, self.color_circulo, self.rectangulo_circulo.center, self.radio_circulo)
 
-    def update(self, lista_eventos):
+    def actualizar(self, lista_eventos):
         mouse_buttons = pygame.mouse.get_pressed()
         if mouse_buttons[0]:
             mouse_pos = pygame.mouse.get_pos()

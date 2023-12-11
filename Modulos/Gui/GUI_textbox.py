@@ -66,7 +66,7 @@ class TextBox(Widget):
         self._slave.blit(image_text,(diferencia_horizontal,diferencia_vertical))#podriamos sacar cuentas para centrar el texto, por el momento 10-10
         
     
-    def update(self, lista_eventos):
+    def actualizar(self, lista_eventos):
         for evento in lista_eventos:
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 if self.slave_rect_collide.collidepoint(evento.pos):#me hicieron click, esto no siempre va a funcionar

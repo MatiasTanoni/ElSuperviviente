@@ -45,7 +45,7 @@ class FormContainerLevel(Form):
                         onclick_param = "",
                         path_image = "Modulos\Assets\Imagenes\Menu\sound.png") 
         
-        #self.lista_widgets.append(self.nivel)
+        self.lista_widgets.append(self.nivel)
         self.lista_widgets.append(self._btn_home)
         self.lista_widgets.append(self._btn_pause)
         self.lista_widgets.append(self._btn_sound)
@@ -53,17 +53,16 @@ class FormContainerLevel(Form):
     def render(self):
         self._slave.fill(self._color_background)
 
-    def update(self, events):                                           
+    def actualizar(self, events):                                           
         if not self.nivel.completado and self.nivel.personaje.vidas > 0 and self.nivel.tiempo_restante != 0:
             if self.verificar_dialog_result():
                 if self.active:
                     self.draw()
                     self.render()
-                    for widget in self.lista_widgets:
-                        widget.update(events)
-                    self.nivel.actualizar(events)
+                    for widget in self.lista_widgets: 
+                        widget.actualizar(events)
             else:
-                self.hijo.update(events)
+                self.hijo.actualizar(events)
         else:
             self.nivel.detener_musica()
             if self.nivel.completado:
@@ -84,14 +83,12 @@ class FormContainerLevel(Form):
         
         self.flag_music_play = not self.flag_music_play
 
-
-
     def btn_pause_click(self, param):
-        #self.nivel.pause_game()
+        self.nivel.pausar_juego()
         self.nivel.detener_musica()
 
         menu_pause = FormMenuPause(self._master, 
-        x= 200, 
+        x= 400, 
         y= 100, 
         w= 400, 
         h= 300, 

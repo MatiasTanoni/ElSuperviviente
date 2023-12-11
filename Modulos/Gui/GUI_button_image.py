@@ -55,7 +55,7 @@ class Button_Image(Widget):
         
         self._slave.blit(image_text,(diferencia_horizontal,diferencia_vertical))
     
-    def update(self, lista_eventos):
+    def actualizar(self, lista_eventos):
         self.isclicked = False
         if self.contador_click > FPS/2:
             

@@ -22,7 +22,7 @@ class FormMain(Form):
         self.exit = False
         self.volume = 0.1
         pygame.mixer.init()
-        pygame.mixer.music.load(r"Modulos\Assets\Musica\background.mp3") #cambiar
+        pygame.mixer.music.load(r"Modulos\Assets\Musica\background.mp3")
         pygame.mixer.music.set_volume(self.volume)
         pygame.mixer.music.play(-1)
         
@@ -38,7 +38,7 @@ class FormMain(Form):
                           path_image= "Modulos\Assets\Imagenes\Menu\Table.png"  
                         )
 
-        # Button Score
+        # Button puntaje
         self.btn_scores = Button_Image(self._slave, 
                                             x, 
                                             y, 
@@ -53,7 +53,7 @@ class FormMain(Form):
                                             "Arial Black",
                                             25)
         
-        # Button Levels
+        # Button Niveles
         self.btn_levels = Button_Image(self._slave, 
                                             x, 
                                             y, 
@@ -70,7 +70,7 @@ class FormMain(Form):
         
 
 
-        # Button Quit
+        # Button salir
         self.btn_quit = Button_Image(self._slave, 
                                             x, 
                                             y, 
@@ -106,15 +106,15 @@ class FormMain(Form):
     def render(self):
         self._slave.fill(self._color_background)
 
-    def update(self, lista_eventos):
+    def actualizar(self, lista_eventos):
         if self.verificar_dialog_result():
             if self.active:
                 self.draw()
                 self.render()
                 for widget in self.lista_widgets:
-                    widget.update(lista_eventos)
+                    widget.actualizar(lista_eventos)
         else:
-            self.hijo.update(lista_eventos)
+            self.hijo.actualizar(lista_eventos)
 
     def btn_scores_click(self, param):
         diccionario = []
@@ -129,7 +129,7 @@ class FormMain(Form):
         w = 425, 
         h = 450, 
         color_background = BLANCO, 
-        color_border = NEGRO, 
+        color_border = VERDE, 
         active = True, 
         path_image = "Modulos\Assets\Imagenes\Menu\Window.png", 
         scoreboard = diccionario, 
@@ -160,7 +160,7 @@ class FormMain(Form):
         w= 400, 
         h= 300, 
         color_background = NEGRO, 
-        color_border = BLANCO, 
+        color_border = VERDE, 
         active = True, 
         path_image = "Modulos\Assets\Imagenes\Menu\Window.png")
 

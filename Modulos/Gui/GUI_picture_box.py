@@ -42,7 +42,7 @@ class PictureBox(Widget):
         self.slave_rect.x = self._x
         self.slave_rect.y = self._y
     
-    def update(self, lista_eventos):
+    def actualizar(self, lista_eventos):
         self.draw()
 
     def set_imagen(self, imagen: pygame.Surface):
