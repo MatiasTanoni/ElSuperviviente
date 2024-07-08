@@ -12,30 +12,30 @@ ElSuperviviente es un juego desarrollado en Python que utiliza Pygame y SQLite. 
 -----------------
 **Imágenes 📷**
 
-*Menú Principal*
+*Menú Principal😮*
 
 ![](https://github.com/MatiasTanoni/ElSuperviviente/blob/master/Imagenes%20Readme/MenuPrincipal.png)
 
-*Menú Configuraciones*
+*Menú Configuraciones🛠*
 
 ![](https://github.com/MatiasTanoni/ElSuperviviente/blob/master/Imagenes%20Readme/Configuraciones.png)
 
-*Menú Niveles*
+*Menú Niveles💎*
 
 ![](https://github.com/MatiasTanoni/ElSuperviviente/blob/master/Imagenes%20Readme/MenuNiveles.png)
 
-*Menú Puntajes*
+*Menú Puntajes📍*
 
 ![](https://github.com/MatiasTanoni/ElSuperviviente/blob/master/Imagenes%20Readme/Puntajes.png)
 
-*Nivel 1*
+*Nivel 1🔮*
 
 ![](https://github.com/MatiasTanoni/ElSuperviviente/blob/master/Imagenes%20Readme/Nivel1.png)
 
-*Nivel 2*
+*Nivel 2💣*
 
 ![](https://github.com/MatiasTanoni/ElSuperviviente/blob/master/Imagenes%20Readme/Nivel2.png)
 
-*Nivel 3*
+*Nivel 3🔱*
 
 ![](https://github.com/MatiasTanoni/ElSuperviviente/blob/master/Imagenes%20Readme/Nivel3.png)
